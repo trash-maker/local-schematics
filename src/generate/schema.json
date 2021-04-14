@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsGenerate",
+  "title": "Generate Option Schema",
+  "type": "object",
+  "additionalProperties": true,
+  "description": "A schematic for templating.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path at which to scaffold the code.",
+      "visible": false
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "template": {
+      "type": "string",
+      "description": "Path to the template.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What template would you like to use for the generation?"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the generated component.",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "What name would you like to use for the generated component?"
+    }
+  },
+  "required": ["template", "name"]
+}

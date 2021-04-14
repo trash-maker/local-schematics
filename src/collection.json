@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "generate": {
+      "description": "Create components from a local template.",
+      "factory": "./generate/index#generate",
+      "schema": "./generate/schema.json"
+    }
+  }
+}
