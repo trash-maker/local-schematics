@@ -3,6 +3,8 @@
 This schematic allow code generation to your
 [Angular](https://angular.io) application using project-local templates.
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 ## Versions
 
 - support AngularCLI >= 11.2.x

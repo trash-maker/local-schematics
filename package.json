@@ -3,13 +3,17 @@
   "version": "0.0.0",
   "description": "A schematics for scaffolding project local templates",
   "scripts": {
+    "commit": "cz",
+    "release": "standard-version",
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
     "postbuild": "npm run copy:json && npm run copy:files",
     "clean": "rimraf dist",
     "copy:files": "copyfiles -u 1 \"src/**/files/**/*\" dist",
     "copy:json": "copyfiles -u 1 \"src/**/*.json\" dist",
-    "test": "npm run build && jasmine dist/**/*_spec.js"
+    "test": "npm run build && jasmine dist/**/*_spec.js",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "schematics",
@@ -17,7 +21,8 @@
     "scaffolding"
   ],
   "author": {
-    "name": "trash-maker"
+    "name": "trash-maker",
+    "url": "https://github.com/trash-maker"
   },
   "repository": {
     "type": "git",
@@ -28,14 +33,73 @@
   "dependencies": {
     "@angular-devkit/core": "^11.2.8",
     "@angular-devkit/schematics": "^11.2.8",
-    "@schematics/angular": "^11.2.8",
     "typescript": "~4.1.2"
   },
   "devDependencies": {
+    "@schematics/angular": "^11.2.8",
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
     "@types/jasmine": "~3.5.0",
     "@types/node": "^12.11.1",
+    "commitizen": "^4.2.3",
     "copyfiles": "^2.4.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^6.0.0",
     "jasmine": "^3.5.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "standard-version": "^9.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "types": {
+        "chore": {
+          "description": "🤖 Build process or auxiliary tool changes",
+          "value": "chore"
+        },
+        "ci": {
+          "description": "🎡 CI related changes",
+          "value": "ci"
+        },
+        "docs": {
+          "description": "️✏️ Documentation only changes",
+          "value": "docs"
+        },
+        "feat": {
+          "description": "🎸 A new feature",
+          "value": "feat"
+        },
+        "fix": {
+          "description": "🐛 A bug fix",
+          "value": "fix"
+        },
+        "perf": {
+          "description": "️⚡ A code change that improves performance",
+          "value": "perf"
+        },
+        "refactor": {
+          "description": "💡 A code change that neither fixes a bug or adds a feature",
+          "value": "refactor"
+        },
+        "release": {
+          "description": "🏹 Create a release commit",
+          "value": "release"
+        },
+        "style": {
+          "description": "💄 Markup, white-space, formatting, missing semi-colons...",
+          "value": "style"
+        },
+        "test": {
+          "description": "💍 Adding missing tests",
+          "value": "test"
+        }
+      }
+    }
   }
 }
